@@ -7,7 +7,7 @@ const cookieParser= require('cookie-parser')
 const userRoute= require('./routes/userRoute')
 const errorHandler = require('./middlewares/errorMiddleware')
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your frontend's actual URL
+    origin: 'https://vercel.com/boymeetsblockchain/graphic-auth-server/5H7VHDVsnuHkRrhRLPv394btr7Ce', // Replace with your frontend's actual URL
     credentials: true,
   }; 
 const app = express()
