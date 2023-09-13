@@ -191,6 +191,27 @@ const deleteUser = asyncHandler(async(req,res)=>{
 });
 
 
+const changeImage =asyncHandler(async(req,res)=>{
+  const {email,imagearr}= req.body
+  if (!email || !imagearr) {
+    res.status(400);
+    throw new Error("Please provide a valid email and a new array of at least 3 images");
+  }
+  
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  // Update the user's imagearr
+  user.imagearr = imagearr
+  await user.save();
+
+  res.status(200).json({ message: "Image array updated successfully" });
+});
+
 
 module.exports = {
     registerUser,
@@ -198,5 +219,6 @@ module.exports = {
     loginUser,
     getUser,
     loginStatus,
-    changePassword 
+    changePassword,
+    changeImage
 }
