@@ -156,10 +156,47 @@ const deleteUser = asyncHandler(async(req,res)=>{
    }
    return res.json(false)
  })
+
+ const changePassword = asyncHandler(async (req, res) => {
+  const { email, currentPassword, newPassword } = req.body;
+
+  if (!email || !currentPassword || !newPassword) {
+    res.status(400);
+    throw new Error("Please provide email, current password, and new password");
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  // Check if the current password is correct
+  const passwordIsCorrect = await bcrypt.compare(currentPassword, user.password);
+
+  if (!passwordIsCorrect) {
+    res.status(401);
+    throw new Error("Current password is incorrect");
+  }
+
+  // Hash and update the new password
+  const salt = await bcrypt.genSalt(10);
+  const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+  user.password = hashedNewPassword;
+  await user.save();
+
+  res.status(200).json({ message: "Password changed successfully" });
+});
+
+
+
 module.exports = {
     registerUser,
     deleteUser,
     loginUser,
     getUser,
-    loginStatus
+    loginStatus,
+    changePassword 
 }
