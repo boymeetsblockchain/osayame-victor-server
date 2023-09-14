@@ -7,7 +7,7 @@ const cookieParser= require('cookie-parser')
 const userRoute= require('./routes/userRoute')
 const errorHandler = require('./middlewares/errorMiddleware')
 const corsOptions = {
-    origin: 'https://graphic-password-auth.vercel.app/', // Replace with your frontend's actual URL
+    origin: 'https://graphic-password-auth.vercel.app/',
     credentials: true,
   }; 
 const app = express()
