@@ -7,7 +7,7 @@ const cookieParser= require('cookie-parser')
 const userRoute= require('./routes/userRoute')
 const errorHandler = require('./middlewares/errorMiddleware')
 const corsOptions = {
-    origin: 'https://vercel.com/boymeetsblockchain/graphic-auth-server/5H7VHDVsnuHkRrhRLPv394btr7Ce', // Replace with your frontend's actual URL
+    origin: 'https://graphic-password-auth.vercel.app/', // Replace with your frontend's actual URL
     credentials: true,
   }; 
 const app = express()
@@ -30,3 +30,7 @@ mongoose.connect(process.env.MONGO_URI).then(()=>{
     })
 })
 .catch(err=>console.log(err))
+
+app.get("/", (req,res)=>{
+ res.send("Homepage")
+})
