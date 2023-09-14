@@ -17,7 +17,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(cookieParser()) 
-app.use(cors(corsOptions));
+app.use(cors());
 // app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(errorHandler)
